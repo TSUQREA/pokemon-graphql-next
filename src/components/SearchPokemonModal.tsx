@@ -85,7 +85,7 @@ export const SearchPokemonModal = ({ renderTrigger }: Props) => {
                   )}
                 </FormControl>
 
-                <Button w={'full'} isLoading={fetching}>
+                <Button type={'submit'} w={'full'} isLoading={fetching}>
                   検索
                 </Button>
 
