@@ -1,10 +1,20 @@
-import { Box, Button, Grid, GridItem, HStack, Text } from '@chakra-ui/react'
+import {
+  Box,
+  Button,
+  Grid,
+  GridItem,
+  HStack,
+  IconButton,
+  Text,
+} from '@chakra-ui/react'
 import { PokemonCard } from '@/components/PokemonCard'
 import { graphql } from '@/lib/gql'
 import { useQuery } from 'urql'
 import { nonNull } from '@/lib/util'
 import { NumberParam, useQueryParam, withDefault } from 'use-query-params'
 import Link from 'next/link'
+import { SearchPokemonModal } from '@/components/SearchPokemonModal'
+import { SearchIcon } from 'lucide-react'
 
 const HomePageQuery = graphql(/* GraphQL */ `
   query HomePageQuery($first: Int!) {
@@ -36,6 +46,20 @@ export default function Home() {
 
   return (
     <Box p={10}>
+      <SearchPokemonModal
+        renderTrigger={(onOpen) => (
+          <IconButton
+            position={'fixed'}
+            top={10}
+            right={10}
+            isRound
+            aria-label={'検索'}
+            icon={<SearchIcon />}
+            onClick={onOpen}
+          />
+        )}
+      />
+
       <Grid templateColumns={'repeat(5, 1fr)'} gap={6}>
         {data?.pokemons?.filter(nonNull).map((pokemon) => (
           <Link key={pokemon.id} href={`/${pokemon.id}`}>

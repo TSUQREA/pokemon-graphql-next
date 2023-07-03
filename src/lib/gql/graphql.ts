@@ -135,6 +135,15 @@ export type PokemonPropertyList_PokemonFragment = {
   maxCP?: number | null
 } & { ' $fragmentName'?: 'PokemonPropertyList_PokemonFragment' }
 
+export type SearchPokemonModalQueryQueryVariables = Exact<{
+  name: Scalars['String']['input']
+}>
+
+export type SearchPokemonModalQueryQuery = {
+  __typename?: 'Query'
+  pokemon?: { __typename?: 'Pokemon'; id: string; name?: string | null } | null
+}
+
 export type PokemonDetailPageQueryQueryVariables = Exact<{
   id: Scalars['String']['input']
 }>
@@ -213,6 +222,58 @@ export const PokemonPropertyList_PokemonFragmentDoc = {
     },
   ],
 } as unknown as DocumentNode<PokemonPropertyList_PokemonFragment, unknown>
+export const SearchPokemonModalQueryDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'SearchPokemonModalQuery' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'name' } },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'pokemon' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'name' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'name' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  SearchPokemonModalQueryQuery,
+  SearchPokemonModalQueryQueryVariables
+>
 export const PokemonDetailPageQueryDocument = {
   kind: 'Document',
   definitions: [

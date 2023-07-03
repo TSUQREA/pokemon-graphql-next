@@ -17,6 +17,8 @@ const documents = {
     types.PokemonCard_PokemonFragmentDoc,
   '\n  fragment PokemonPropertyList_pokemon on Pokemon {\n    classification\n    types\n    maxHP\n    maxCP\n  }\n':
     types.PokemonPropertyList_PokemonFragmentDoc,
+  '\n  query SearchPokemonModalQuery($name: String!) {\n    pokemon(name: $name) {\n      id\n      name\n    }\n  }\n':
+    types.SearchPokemonModalQueryDocument,
   '\n  query PokemonDetailPageQuery($id: String!) {\n    pokemon(id: $id) {\n      id\n      name\n      image\n      ...PokemonPropertyList_pokemon\n    }\n  }\n':
     types.PokemonDetailPageQueryDocument,
   '\n  query HomePageQuery($first: Int!) {\n    pokemons(first: $first) {\n      id\n      ...PokemonCard_pokemon\n    }\n  }\n':
@@ -49,6 +51,12 @@ export function graphql(
 export function graphql(
   source: '\n  fragment PokemonPropertyList_pokemon on Pokemon {\n    classification\n    types\n    maxHP\n    maxCP\n  }\n'
 ): (typeof documents)['\n  fragment PokemonPropertyList_pokemon on Pokemon {\n    classification\n    types\n    maxHP\n    maxCP\n  }\n']
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: '\n  query SearchPokemonModalQuery($name: String!) {\n    pokemon(name: $name) {\n      id\n      name\n    }\n  }\n'
+): (typeof documents)['\n  query SearchPokemonModalQuery($name: String!) {\n    pokemon(name: $name) {\n      id\n      name\n    }\n  }\n']
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
