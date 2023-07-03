@@ -127,6 +127,34 @@ export type PokemonCard_PokemonFragment = {
   image?: string | null
 } & { ' $fragmentName'?: 'PokemonCard_PokemonFragment' }
 
+export type PokemonPropertyList_PokemonFragment = {
+  __typename?: 'Pokemon'
+  classification?: string | null
+  types?: Array<string | null> | null
+  maxHP?: number | null
+  maxCP?: number | null
+} & { ' $fragmentName'?: 'PokemonPropertyList_PokemonFragment' }
+
+export type PokemonDetailPageQueryQueryVariables = Exact<{
+  id: Scalars['String']['input']
+}>
+
+export type PokemonDetailPageQueryQuery = {
+  __typename?: 'Query'
+  pokemon?:
+    | ({
+        __typename?: 'Pokemon'
+        id: string
+        name?: string | null
+        image?: string | null
+      } & {
+        ' $fragmentRefs'?: {
+          PokemonPropertyList_PokemonFragment: PokemonPropertyList_PokemonFragment
+        }
+      })
+    | null
+}
+
 export type HomePageQueryQueryVariables = Exact<{
   first: Scalars['Int']['input']
 }>
@@ -163,6 +191,102 @@ export const PokemonCard_PokemonFragmentDoc = {
     },
   ],
 } as unknown as DocumentNode<PokemonCard_PokemonFragment, unknown>
+export const PokemonPropertyList_PokemonFragmentDoc = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'PokemonPropertyList_pokemon' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'Pokemon' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: 'classification' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'types' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'maxHP' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'maxCP' } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<PokemonPropertyList_PokemonFragment, unknown>
+export const PokemonDetailPageQueryDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'PokemonDetailPageQuery' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'pokemon' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'id' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'id' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'image' } },
+                {
+                  kind: 'FragmentSpread',
+                  name: { kind: 'Name', value: 'PokemonPropertyList_pokemon' },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'PokemonPropertyList_pokemon' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'Pokemon' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: 'classification' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'types' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'maxHP' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'maxCP' } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  PokemonDetailPageQueryQuery,
+  PokemonDetailPageQueryQueryVariables
+>
 export const HomePageQueryDocument = {
   kind: 'Document',
   definitions: [

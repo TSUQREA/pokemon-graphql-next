@@ -1,16 +1,10 @@
-import {
-  Box,
-  Button,
-  Grid,
-  GridItem,
-  HStack,
-  Text,
-} from '@chakra-ui/react'
+import { Box, Button, Grid, GridItem, HStack, Text } from '@chakra-ui/react'
 import { PokemonCard } from '@/components/PokemonCard'
 import { graphql } from '@/lib/gql'
 import { useQuery } from 'urql'
 import { nonNull } from '@/lib/util'
 import { NumberParam, useQueryParam, withDefault } from 'use-query-params'
+import Link from 'next/link'
 
 const HomePageQuery = graphql(/* GraphQL */ `
   query HomePageQuery($first: Int!) {
@@ -44,9 +38,11 @@ export default function Home() {
     <Box p={10}>
       <Grid templateColumns={'repeat(5, 1fr)'} gap={6}>
         {data?.pokemons?.filter(nonNull).map((pokemon) => (
-          <GridItem key={pokemon.id}>
-            <PokemonCard pokemon={pokemon} />
-          </GridItem>
+          <Link key={pokemon.id} href={`/${pokemon.id}`}>
+            <GridItem>
+              <PokemonCard pokemon={pokemon} />
+            </GridItem>
+          </Link>
         ))}
       </Grid>
 
