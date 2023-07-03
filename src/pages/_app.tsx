@@ -1,8 +1,9 @@
 import type { AppProps } from 'next/app'
-import { ChakraProvider } from '@chakra-ui/react'
+import { Box, ChakraProvider } from '@chakra-ui/react'
 import { cacheExchange, Client, fetchExchange, Provider } from 'urql'
 import NextAdapterPages from 'next-query-params/pages'
 import { QueryParamProvider } from 'use-query-params'
+import { Header } from '@/components/Header'
 
 const client = new Client({
   url: 'https://graphql-pokemon2.vercel.app/',
@@ -14,7 +15,10 @@ export default function App({ Component, pageProps }: AppProps) {
     <ChakraProvider>
       <Provider value={client}>
         <QueryParamProvider adapter={NextAdapterPages}>
-          <Component {...pageProps} />
+          <Box p={10}>
+            <Header />
+            <Component {...pageProps} />
+          </Box>
         </QueryParamProvider>
       </Provider>
     </ChakraProvider>
