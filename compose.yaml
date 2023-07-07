@@ -11,8 +11,11 @@ services:
   server:
     build:
       context: .
-    environment:
-      NODE_ENV: production
+      target: develop
+    command: npm run dev
+    volumes:
+      - .:/usr/src/app
+      - node_modules:/usr/src/app/node_modules
     ports:
       - 3000:3000
 
@@ -49,3 +52,5 @@ services:
 #   db-password:
 #     file: db/password.txt
 
+volumes:
+  node_modules:
